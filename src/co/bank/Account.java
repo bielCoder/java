@@ -5,6 +5,7 @@ public class Account {
     private Number account;
     private String name;
     private double balance;
+    private Console console;
 
    private static final int MAX_LENGTH = 12;
 
@@ -12,7 +13,7 @@ public class Account {
         this.agency = agency;
         this.account = account;
         this.setName(name);
-
+        console = new Console();
     }
 
     public String getName() {
@@ -40,17 +41,35 @@ public class Account {
         return account;
     }
 
+
+
+
+
     public boolean withdraw(double amount) {
-        if(balance < amount)
-        {
+        if (amount <= 0) {
+            System.out.println("Valor de saque inválido. Tente novamente.");
             return false;
-        } else {
-            balance -= amount;
-            System.out.println("Amount to withdraw, \n" +
-                    "Insufficient balance");
-            return true;
         }
 
+        if (balance < amount) {
+            System.out.println("Saldo insuficiente.");
+            return false;
+        }
 
+        balance -= amount;
+        System.out.println("Você sacou: R$" + amount);
+        System.out.println("Saldo restante: R$" + balance);
+        return true;
     }
+
+
+    public double deposit(double amount) {
+       return balance += amount;
+    }
+
+
+    public double getBalance() {
+        return balance;
+    }
+
 }
